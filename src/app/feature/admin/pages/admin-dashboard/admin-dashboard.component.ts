@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  pageTitle = 'Admin Dashboard';
+  pageLabel = 'Dashboard Overview';
   constructor() { }
 
   ngOnInit(): void {

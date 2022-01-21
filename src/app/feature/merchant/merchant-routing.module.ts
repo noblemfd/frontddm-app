@@ -7,6 +7,9 @@ import { MerchantComponent } from './merchant.component';
 import { MandateSchedulesComponent } from './pages/mandate-schedules/mandate-schedules.component';
 import { ReportComponent } from './pages/report/report.component';
 import { MandateByCustomerComponent } from './pages/mandate-by-customer/mandate-by-customer.component';
+import { MandateDetailComponent } from './pages/mandates/mandate-detail/mandate-detail.component';
+import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
+import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
 
 const routes: Routes = [
   {path: '',
@@ -16,17 +19,25 @@ const routes: Routes = [
     path: '',
     component: MerchantDashboardComponent
   },
-/*  {
-    path: 'vehicle-detail/:id',
-    component: VehicleDetailComponent
-  },*/
   {
     path: 'mandate-list',
     component: MandatesComponent
   },
   {
+    path: 'mandate-detail/:id',
+    component: MandateDetailComponent
+  },
+  {
     path: 'mandate-schedules',
     component: MandateSchedulesComponent
+  },
+  {
+    path: 'completed-payments',
+    component: CompletedPaymentsComponent
+  },
+  {
+    path: 'this-year-mandates',
+    component: ThisYearMandateComponent
   },
   {
     path: 'reports',

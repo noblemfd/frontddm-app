@@ -1,6 +1,6 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-danger elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
+  <a href="#" class="brand-link">
     <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">ZMandate</span>
   </a>
@@ -9,14 +9,14 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">{{ getUserName() }}</a>
       </div>
     </div>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a [routerLink]="['/']" routerLinkActive="active" class="nav-link">
+          <a [routerLink]="['/admin-dashboard']" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -25,16 +25,30 @@
         </li>
         <li class="nav-header">DETAILS</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a [routerLink]="['/admin-dashboard/merchant-list']" routerLinkActive="active" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Merchants
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin-dashboard/mandate-list']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Mandates
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin-dashboard/mandate-schedules']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Mandate Schedules
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
-    <!-- /.sidebar-menu -->
   </div>
-  <!-- /.sidebar -->
 </aside>

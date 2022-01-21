@@ -8,10 +8,13 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { NgSelectModule} from '@ng-select/ng-select';
 import { CoreModule } from './core/core.module';
 //import { AuthModule } from './feature/auth/auth.module';
 //import { AuthService } from './feature/auth/services/auth.service';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
+import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,14 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
   //  AuthModule,
     CoreModule,
     NgxSpinnerModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    NgxDatatableModule,
+    ngxChartsBarModule,
+    ngxChartsLineModule,
+    ngxChartsComboModule,
+    ngxChartsPieModule,
+    ngxChartsStackedModule,
+    NgSelectModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

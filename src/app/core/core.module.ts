@@ -12,8 +12,9 @@ import { CustomerSidebarComponent } from './components/customer-sidebar/customer
 import { FooterComponent } from './components/footer/footer.component';
 import { ServerErrorComponent } from './components/errors/server-error/server-error.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
-
-
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropdown-menu.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,18 +26,23 @@ import { NotFoundComponent } from './components/errors/not-found/not-found.compo
     CustomerSidebarComponent,
     FooterComponent,
     ServerErrorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DropdownComponent,
+    DropdownMenuComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule,
     SharedModule,
     ToastrModule.forRoot({
       timeOut: 15000, // 15 seconds
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
+      maxOpened : 5,
       closeButton: true,
       progressBar: true,
+      progressAnimation : 'increasing',
     })
   ],
   exports: [

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+ // public currentYear: string = DateTime.now().toFormat('y');
 
   constructor() { }
 

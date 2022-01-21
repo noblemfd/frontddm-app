@@ -13,7 +13,6 @@ export class HasRoleDirective implements OnInit {
   constructor(private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
     private authService: AuthService) {
-
   }
 
   ngOnInit(): void {
@@ -25,12 +24,11 @@ export class HasRoleDirective implements OnInit {
         return;
       }
 
-      if (this.user?.roles.some(r => this.appHasRole.includes(r))) {
+      if (this.user?.roles?.some(r => this.appHasRole.includes(r))) {
         this.viewContainerRef.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainerRef.clear();
       }
     })
-
   }
 }

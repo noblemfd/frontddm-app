@@ -14,7 +14,8 @@ export class LoadingService {
       this.spinnerService.show(undefined, {
         type: 'ball-pulse-sync',
         bdColor: 'rgba(255,255,255,0.7)',
-        color: '#333333'
+       /* color: '#333333' */
+       color: '#FF0000'
       });
     }
 

@@ -1,8 +1,12 @@
 export interface IResponse<T> {
   message: string;
   error: boolean;
-  code: number;
+  status_code: number;
   results: T;
+}
+
+export interface IUsers {
+  users: IUser;
 }
 
 export interface IUser {
@@ -13,3 +17,4 @@ export interface IUser {
   roles?: string[];
   expires?: Date;
 }
+

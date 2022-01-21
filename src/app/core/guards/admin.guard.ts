@@ -3,27 +3,23 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/feature/auth/services/auth.service';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AdminGuard implements CanActivate {
-  constructor(private authService: AuthService, private toastr: ToastrService){}
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
-  canActivate(): Observable<boolean> {
-    return this.authService.currentUser$.pipe(
-      map(user => {
-        if(user){
-          if (user?.roles?.includes('Admin')) {
-            return true;
-          }
-        }
-        this.toastr.error('Requires Admin');
-        return false;
-      })
-    )
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (localStorage.getItem('role') === "Admin") {
+      return true;
+    }
+    this.router.navigate(['admin-dashboard']);
+    return false;
   }
 
 }

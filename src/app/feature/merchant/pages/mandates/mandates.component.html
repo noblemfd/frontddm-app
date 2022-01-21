@@ -1,38 +1,100 @@
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0"> {{ pageTitle }}</h1>
-        </div><!-- /.col -->
+          <h1 class="m-0">Merchant Dashboard: {{ pageTitle }}</h1>
+        </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a [routerLink]="['/merchant-dashboard']">Dashboard</a></li>
             <li class="breadcrumb-item active">{{ pageTitle }}</li>
           </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-xs-12 col-12 ">
-          <div class="card">
+          <div class="card card-danger">
             <div class="card-header">
-              <h3 class="card-title">{{ pageLabel }}</h3>
-
+              <h3 class="card-title">{{ pageTitle }} List</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
             </div>
             <div class="card-body">
+              <ngx-datatable tableClass="table table-striped table-bordered table-hover" [data]="allMandateList" [columns]="columns" [options]="options">
+                <ngx-caption>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-6 col-6 ">
 
+                    </div>
+                    <div class="col-sm-6 col-xs-6 col-6  text-right">
+                      <button type="button" (click)="addMandateData(templateAdd)"
+                       class="btn btn-primary">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Add New Mandate
+                      </button>
+                    </div>
+                  </div>
+                </ngx-caption>
+
+                <ng-template #addressTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+
+                </ng-template>
+                <ng-template #idTpl let-rowIndex="rowIndex" let-row="row">
+                  {{rowIndex+1}}
+                </ng-template>
+
+                <ng-template #isApprovedTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : 'bg-danger'">{{columnValue | toTrue }}</span>
+                </ng-template>
+
+                <ng-template #startDateTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  {{ columnValue | date: 'dd-MM-yyyy' }}
+                </ng-template>
+
+                <ng-template #endDateTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  {{ columnValue | date: 'dd-MM-yyyy' }}
+                </ng-template>
+
+                <ng-template #paymentFrequencyTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : (columnValue == '2') ? 'bg-info' : 'bg-warning'">{{columnValue | paymentFrequency }}</span>
+                </ng-template>
+
+                <ng-template #amountTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  {{ columnValue | currency: 'N' }}
+                </ng-template>
+
+                <ng-template #actionTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  <a class="btn btn-primary btn-sm" (click)="viewMandateData(row)">
+                    View
+                  </a>
+                </ng-template>
+
+              </ngx-datatable>
             </div>
           </div>
         </div>
       </div>
-
     </div><!--/. container-fluid -->
   </section>
-
+  <!-- /.content -->
 </div>
+<ng-template #templateAdd>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>
+

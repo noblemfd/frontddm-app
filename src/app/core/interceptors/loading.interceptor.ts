@@ -5,13 +5,14 @@ import { LoadingService } from 'src/app/core/services/loading.service';
 import { delay, finalize } from 'rxjs/operators';
 
 @Injectable()
+
 export class LoadingInterceptor implements HttpInterceptor {
     constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loadingService.loading();
     return next.handle(request).pipe(
-      delay(1000),  // can be deleted
+      delay(1000),  // delays for I second
       finalize(() => {
         this.loadingService.idle();
       })

@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { LSelect2Module } from 'ngx-select2';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { AlertModule,AlertConfig } from 'ngx-bootstrap/alert';
@@ -17,6 +19,17 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { PagerComponent } from './components/pager/pager.component';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { ToBooleanPipe } from './pipes/to-boolean.pipe';
+import { ToTruePipe } from './pipes/to-true.pipe';
+import { ToYesPipe } from './pipes/to-yes.pipe';
+import { ToStatusPipe } from './pipes/to-status.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
+import { ChargeModePipe } from './pipes/charge-mode.pipe';
+import { NotificationResponsePipe } from './pipes/notification-response.pipe';
+import { NotificationTypePipe } from './pipes/notification-type.pipe';
+import { WhoToChargePipe } from './pipes/who-to-charge.pipe';
+import { PaymentFrequencyPipe } from './pipes/payment-frequency.pipe';
+import { MandateStatusPipe } from './pipes/mandate-status.pipe';
 
 
 @NgModule({
@@ -24,8 +37,9 @@ import { HasRoleDirective } from './directives/has-role.directive';
     AlertConfig,
     BsDatepickerConfig,
     BsDropdownConfig,
-   // BsModalService,
-    ProgressbarConfig
+    BsModalService,
+    ProgressbarConfig,
+   // LSelect2Module
   ],
   imports: [
     AlertModule,
@@ -37,9 +51,11 @@ import { HasRoleDirective } from './directives/has-role.directive';
   //  BrowserModule,
 //BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
     BsDropdownModule,
     PopoverModule,
-    ProgressbarModule
+    ProgressbarModule,
+   // LSelect2Module
   ],
   exports: [
     PaginationModule,
@@ -47,7 +63,19 @@ import { HasRoleDirective } from './directives/has-role.directive';
     PagerComponent,
     ReactiveFormsModule,
     BsDropdownModule,
-    TextInputComponent
+    TextInputComponent,
+    ToBooleanPipe,
+    ToTruePipe,
+    ToYesPipe,
+    ToStatusPipe,
+    DurationPipe,
+    ChargeModePipe,
+    NotificationResponsePipe,
+    NotificationTypePipe,
+    WhoToChargePipe,
+    PaymentFrequencyPipe,
+    MandateStatusPipe,
+  //  LSelect2Module
   ],
   declarations: [
     MandateSummaryComponent,
@@ -56,7 +84,18 @@ import { HasRoleDirective } from './directives/has-role.directive';
     TextInputComponent,
     PagerComponent,
     PagingHeaderComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    ToBooleanPipe,
+    ToTruePipe,
+    ToYesPipe,
+    ToStatusPipe,
+    DurationPipe,
+    ChargeModePipe,
+    NotificationResponsePipe,
+    NotificationTypePipe,
+    WhoToChargePipe,
+    PaymentFrequencyPipe,
+    MandateStatusPipe
   ],
 })
 export class SharedModule { }

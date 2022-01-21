@@ -11,16 +11,20 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
-
-  canActivate(): Observable<boolean> {
-    return this.authService.currentUser$.pipe(
-      map(user => {
-        if(user)
-          return true;
-        this.toastr.info('Please Log In!');
-        return false;
-      })
-    )
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    if (!this.authService.isLoggedIn()) {
+      this.toastr.info('Please Log In!');
+      this.router.navigate(['/auth']);
+      return false;
+    }
+    this.authService.isLoggedIn();
+    return true;
   }
-
 }

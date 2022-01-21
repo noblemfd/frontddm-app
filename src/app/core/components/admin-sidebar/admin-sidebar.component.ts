@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-sidebar.component.scss']
 })
 export class AdminSidebarComponent implements OnInit {
+  userName = localStorage.getItem('username');
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
 
+  getUserName() {
+    return this.userName;
+  }
 }
