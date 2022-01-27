@@ -65,7 +65,7 @@
                 </ng-template>
 
                 <ng-template #paymentFrequencyTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
-                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : (columnValue == '2') ? 'bg-info' : 'bg-warning'">{{columnValue | paymentFrequency }}</span>
+                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : (columnValue == '2') ? 'bg-info' : (columnValue == '3') ? 'bg-warning': 'bg-danger'">{{columnValue | paymentFrequency }}</span>
                 </ng-template>
 
                 <ng-template #amountTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">

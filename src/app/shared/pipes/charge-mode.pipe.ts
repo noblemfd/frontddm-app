@@ -5,8 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ChargeModePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: number): string {
+    if (value == 1) {
+        return 'Fixed';
+    }
+    if (value == 2) {
+      return 'Percentage';
+    }
+    return 'Fixed';
   }
-
 }

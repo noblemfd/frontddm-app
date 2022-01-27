@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="col-sm-6 col-xs-6 col-6  text-right">
-                      <button type="button" (click)="addMerchantData(templateAdd)"
+                      <button type="button" (click)="addNewMerchant()"
                        class="btn btn-primary">
                                     <i class="fa fa-plus" aria-hidden="true"></i> Add New Merchant
                       </button>
@@ -51,6 +51,10 @@
                   {{rowIndex+1}}
                 </ng-template>
 
+                <ng-template #mobileNumberTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+                  {{columnValue?.mobile_number || 'N/A'}}
+                </ng-template>
+
                 <ng-template #notificationRequiredTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
                   <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : 'bg-danger'">{{columnValue | toTrue }}</span>
                 </ng-template>
@@ -60,15 +64,16 @@
                 </ng-template>
 
                 <ng-template #actionTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
-                  <a class="btn btn-primary btn-sm" (click)="viewMerchantData(row)">
-                    View
+                  <a class="btn btn-primary btn-sm" (click)="viewMerchantData(merchantDetail, row)">
+                    <i class="fa fa-eye" aria-hidden="true"></i> View
                   </a>&nbsp;
+                <!--
                   <a class="btn btn-info btn-sm" (click)="editMerchantData(row)">
                     Edit
                 </a>
-        <!--          <a class="btn btn-danger btn-sm" href="javascript:void(0)" (click)="removeCountryModal(rowIndex) ">
+                <a class="btn btn-danger btn-sm" href="javascript:void(0)" (click)="removeCountryModal(rowIndex) ">
                     Delete
-                  </a>-->
+                </a>-->
                 </ng-template>
 
               </ngx-datatable>
@@ -81,52 +86,60 @@
   <!-- /.content -->
 </div>
 
-<ng-template #templateAdd>
+<ng-template #merchantDetail>
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Add Merchant</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef?.hide()">
+      <h4 class="modal-title pull-left">Merchant Detail</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="onClose()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
-    <form [formGroup]="createForm" (ngSubmit)="submitCreateForm()">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">User Name<span style="color:red;">*</span></label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter User Name">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Merchant Name<span style="color:red;">*</span></label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Merchant Name">
-            </div>
-          </div>
+    <div class="modal-body" *ngIf="merchantList != undefined">
+      <div class="row">
+        <div class="col-md-6">
+          User Name: <strong>{{ merchantList.user.user_name || 'N/A' }}</strong>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Account Number<span style="color:red;">*</span></label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Account Number">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Mobile Number</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Mobile Number">
-            </div>
-          </div>
+        <div class="col-md-6">
+          Merchant Name: <strong>{{ merchantList.merchant_name || 'N/A' }}</strong>
         </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        Account No.: <strong>{{ merchantList.account_number || 'N/A' }}</strong>
       </div>
-      <div class="modal-footer">
-        <button type="button" id="cancelCreate" class="btn btn-secondary" data-dismiss="modal" (click)="bsModalRef?.hide()">Close</button>
-        <button type="submit" [disabled]="isLoading" class="btn btn-success" (click)="createValidate()">
-          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-          <i class="fa fa-save" aria-hidden="true"></i> Save</button>
+      <div class="col-md-6">
+        Mobile No.: <strong>{{ merchantList.user?.mobile_number || 'N/A' }}</strong>
       </div>
-    </form>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        Charges Required:
+        <span *ngIf="merchantList.charge_required === 1" class="badge bg-success">True</span>
+        <span *ngIf="merchantList.charge_required === 0" class="badge bg-danger">False</span>
+      </div>
+      <div class="col-md-6">
+        Who To Charge:
+        <span *ngIf="merchantList.who_to_charge === 0" class="badge bg-danger">None</span>
+        <span *ngIf="merchantList.who_to_charge === 1" class="badge bginfo">Merchant</span>
+        <span *ngIf="merchantList.who_to_charge === 2" class="badge bg-warning">Customer</span>
+        <span *ngIf="merchantList.who_to_charge === 3" class="badge bg-success">Both</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        Charge Mode:
+        <span *ngIf="merchantList.charge_mode === 1" class="badge bg-info">Fixed</span>
+        <span *ngIf="merchantList.charge_mode === 2" class="badge bg-warning">Percentage</span>
+      </div>
+      <div class="col-md-6">
+        <span *ngIf="merchantList.charge_mode === 1">Amount: <strong>{{ merchantList?.charge_value || 'N/A' }}</strong></span>
+        <span *ngIf="merchantList.charge_mode === 2">Percentage (%): <strong>{{ merchantList?.charge_percent || 'N/A' }}</strong></span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="cancelCreate" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+    </div>
+    </div>
   </div>
 </ng-template>
 

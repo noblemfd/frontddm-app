@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pagination, PaginatedResult } from 'src/app/shared/models/pagination';
 import { IMandate, IMandates, IResponse } from '../../models/mandates.model';
 import { Observable } from 'rxjs';
+import { MandateCreateComponent } from '../mandates/mandate-create/mandate-create.component';
 
 @Component({
   selector: 'app-mandates',
@@ -160,7 +161,6 @@ export class MandatesComponent implements OnInit {
   loadAllMandates(){
     this.mandateService.getAllMandates().subscribe({
       next: (res: any) => {
-      //  console.log(res);
         this.allMandateList = res.result;
         this.isLoading = false;
       },
@@ -171,8 +171,8 @@ export class MandatesComponent implements OnInit {
     })
   }
 
-  addMandateData(templateAdd: TemplateRef<any>) {
-    this.bsModalRef = this.modalService.show(templateAdd);
+  addNewMandate() {
+    this.bsModalRef = this.modalService.show(MandateCreateComponent, Object.assign({}, { class: 'gray modal-lg'}));
   }
 
   removeMandateData(rowIndex: any) {}
@@ -183,7 +183,7 @@ export class MandatesComponent implements OnInit {
   }
 
   viewMandateData(row: any) {
-   // this.router.navigate(['/company-dashboard/vehicle-detail', row.id]);
+    this.router.navigate(['/merchant-dashboard/mandate-detail', row.id]);
     this.mandate = row;
   }
 

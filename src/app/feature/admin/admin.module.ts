@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule} from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -17,7 +19,12 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
 import { MandatesComponent } from './pages/mandates/mandates.component';
 import { MandateDetailComponent } from './pages/mandates/mandate-detail/mandate-detail.component';
 import { MandateSchedulesComponent } from './pages/mandate-schedules/mandate-schedules.component';
-
+import { MerchantDetailComponent } from './pages/merchants/merchant-detail/merchant-detail.component';
+import { MerchantEditComponent } from './pages/merchants/merchant-edit/merchant-edit.component';
+import { MandateScheduleDetailComponent } from './pages/mandate-schedules/mandate-schedule-detail/mandate-schedule-detail.component';
+import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
+import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
+import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-year-mandate-detail/this-year-mandate-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +35,18 @@ import { MandateSchedulesComponent } from './pages/mandate-schedules/mandate-sch
     TransactionsComponent,
     MandatesComponent,
     MandateDetailComponent,
-    MandateSchedulesComponent
+    MandateSchedulesComponent,
+    MerchantDetailComponent,
+    MerchantEditComponent,
+    MandateScheduleDetailComponent,
+    CompletedPaymentsComponent,
+    ThisYearMandateComponent,
+    ThisYearMandateDetailComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
+  //  BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     FormsModule,
@@ -46,6 +60,7 @@ import { MandateSchedulesComponent } from './pages/mandate-schedules/mandate-sch
     ngxChartsPieModule,
     ngxChartsStackedModule,
     NgSelectModule,
+    NgOptionHighlightModule
   ]
 })
 export class AdminModule { }

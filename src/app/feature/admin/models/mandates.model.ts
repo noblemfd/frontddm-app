@@ -1,3 +1,6 @@
+import { IMandateDetails } from './mandate-details.model'
+import { IMerchants } from './merchants.model'
+
 export interface IResponse<T> {
   message: string;
   error: boolean;
@@ -26,5 +29,7 @@ export interface IMandates {
   approved_by: string;
   approved_date: Date;
   created_date: Date;
+ // mandate_details?: IMandateDetails[];
+ // merchants?: IMerchants[];
 }
 

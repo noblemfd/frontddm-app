@@ -7,6 +7,10 @@ import { MerchantsComponent } from './pages/merchants/merchants.component';
 import { MandatesComponent } from './pages/mandates/mandates.component';
 import { MandateDetailComponent } from './pages/mandates/mandate-detail/mandate-detail.component';
 import { MandateSchedulesComponent } from './pages/mandate-schedules/mandate-schedules.component';
+import { MandateScheduleDetailComponent } from './pages/mandate-schedules/mandate-schedule-detail/mandate-schedule-detail.component';
+import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
+import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
+import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-year-mandate-detail/this-year-mandate-detail.component';
 
 const routes: Routes = [
   {path: '',
@@ -36,6 +40,22 @@ const routes: Routes = [
   {
     path: 'mandate-schedules',
     component: MandateSchedulesComponent
+  },
+  {
+    path: 'mandate-schedule-detail/:id',
+    component: MandateScheduleDetailComponent
+  },
+  {
+    path: 'completed-payments',
+    component: CompletedPaymentsComponent
+  },
+  {
+    path: 'this-year-mandates',
+    component: ThisYearMandateComponent
+  },
+  {
+    path: 'this-year-mandate-detail/:id',
+    component: ThisYearMandateDetailComponent
   },
 
 ]}];

@@ -164,7 +164,6 @@ export class MandatesComponent implements OnInit {
   loadAllMandates(){
     this.mandateService.getAllMandates().subscribe({
       next: (res: any) => {
-      //  console.log(res);
         this.allMandateList = res.result;
         this.isLoading = false;
       },
@@ -185,7 +184,7 @@ export class MandatesComponent implements OnInit {
   }
 
   viewMandateData(row: any) {
-   // this.router.navigate(['/company-dashboard/vehicle-detail', row.id]);
+    this.router.navigate(['/admin-dashboard/mandate-detail', row.id]);
     this.mandate = row;
   }
 

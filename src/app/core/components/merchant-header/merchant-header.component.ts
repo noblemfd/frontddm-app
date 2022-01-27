@@ -13,43 +13,60 @@ import { AuthService } from 'src/app/feature/auth/services/auth.service';
   styleUrls: ['./merchant-header.component.scss']
 })
 export class MerchantHeaderComponent implements OnInit {
-  public sidebarMenuOpened = true;
   @Output() toggleMenuSidebar: EventEmitter<any> = new EventEmitter<any>();
+  public searchForm!: FormGroup;
+  menuAdminLogout = false;
+  userName = localStorage.getItem('username');
+  userRole = localStorage.getItem('role');
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.searchForm = new FormGroup({
+        search: new FormControl(null)
+    });
+}
+
+  onAdminLogoutClick(): void {
+    this.menuAdminLogout = !this.menuAdminLogout;
   }
 
   signOut() {
-    Swal.fire({
-     title: 'Are you sure want to signout?',
-     text: 'You will be signed out from  ZMandate!',
-     icon: 'warning',
-     showCancelButton: true,
-     confirmButtonText: 'Yes',
-     cancelButtonText: 'No'
-   }).then((result) => {
-     if (result.value) {
-       Swal.fire(
-         'Signout!',
-         'You have signed out successfully.',
-         'success'
-       ),
-       this.authService.logout();
-     } else if (result.dismiss === Swal.DismissReason.cancel) {
-       Swal.fire(
-         'Cancelled',
-         'You are back to the dashboard',
-         'error'
-       );
-     }
-   });
-   }
+   Swal.fire({
+    title: 'Are you sure want to signout?',
+    text: 'You will be signed out from  ZMandate!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Signout!',
+        'You have signed out successfully.',
+        'success'
+      ),
+      this.authService.logout();
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire(
+        'Cancelled',
+        'You are back to the dashboard',
+        'error'
+      );
+    }
+  });
+  }
 
+  getUserName() {
+    return this.userName;
+  }
 
+  getUserRole() {
+    return this.userRole;
+  }
 
 }

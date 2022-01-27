@@ -1,0 +1,105 @@
+<div role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add Mandate</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <form class="form-horizontal" id="add-form" [formGroup]="createMandateForm" (ngSubmit)="onMandateSubmitForm()">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ReferenceNumber">Reference Number<span style="color:red;">*</span></label>
+              <input type="text" class="form-control" formControlName='ReferenceNumber' id="ReferenceNumber" placeholder="Reference Number">
+              <div *ngIf="fc['ReferenceNumber'].touched && fc['ReferenceNumber'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['ReferenceNumber'].errors && fc['ReferenceNumber'].errors['required']">Reference Number is required!</div>
+                <div *ngIf="fc['ReferenceNumber'].errors && fc['ReferenceNumber'].errors['minlength']">Reference Number cannot be less than 3 characters!</div>
+                <div *ngIf="fc['ReferenceNumber'].errors && fc['ReferenceNumber'].errors['maxlength']">Reference Number cannot be more than 50 characters!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="DrAccountNumber">Debit Account No.<span style="color:red;">*</span></label>
+              <input type="text" class="form-control" formControlName='DrAccountNumber' id="DrAccountNumber" placeholder="Debit Account No.">
+              <div *ngIf="fc['DrAccountNumber'].touched && fc['DrAccountNumber'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['DrAccountNumber'].errors && fc['DrAccountNumber'].errors['required']">Debit Account No. is required!</div>
+                <div *ngIf="fc['DrAccountNumber'].errors && fc['DrAccountNumber'].errors['minlength']">Debit Account No. cannot be less than 5 characters!</div>
+                <div *ngIf="fc['DrAccountNumber'].errors && fc['DrAccountNumber'].errors['maxlength']">Debit Account No. cannot be more than 50 characters!</div>
+                <div *ngIf="fc['DrAccountNumber'].errors && fc['DrAccountNumber'].errors['pattern']">Enter only numbers for Debit Account No.!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="StartDate">Start Date<span style="color:red;">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" bsDatepicker [bsConfig]="bsConfig" [minDate]="minStartDate" class="form-control" formControlName="StartDate" placeholder="DD-MM-YYYY" formControlName="StartDate" readonly>
+              </div>
+              <div *ngIf="fc['StartDate'].touched && fc['StartDate'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['StartDate'].errors && fc['StartDate'].errors['required']">Start Date is required!</div>
+                <div *ngIf="fc['StartDate'].errors && fc['StartDate'].errors['DateComparisonValidator']">Start Date must be less than End Date!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="EndDate">End Date<span style="color:red;">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" bsDatepicker [bsConfig]="bsConfig" [minDate]="minEndDate" class="form-control" formControlName="EndDate" placeholder="DD-MM-YYYY" formControlName="EndDate" readonly>
+              </div>
+              <div *ngIf="fc['EndDate'].touched && fc['EndDate'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['EndDate'].errors && fc['EndDate'].errors['required']">End Date is required!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="PaymentFrequency">Payment Frequency<span style="color:red;">*</span></label>
+              <ng-select [items]="paymentFrequencyData"
+                [selectOnTab]="true"
+                [searchable]="true"
+                bindValue="key"
+                bindLabel="value"
+                placeholder="Select Payment Frequency"
+                [multiple]="false"
+                [clearable]="true"
+                formControlName="PaymentFrequency">
+              </ng-select>
+              <div *ngIf="fc['PaymentFrequency'].touched && fc['PaymentFrequency'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['PaymentFrequency'].errors && fc['PaymentFrequency'].errors['required']">Payment Frequency is required!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Amount">Amount<span style="color:red;">*</span></label>
+              <input type="text" formControlName="Amount" class="form-control" id="Amount" placeholder="234000.09">
+              <div *ngIf="fc['Amount'].touched && fc['Amount'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['Amount'].errors && fc['Amount'].errors['required']">The Amount is required!</div>
+                <div *ngIf="fc['Amount'].errors && fc['Amount'].errors['numeric']">Only numeric value is Allowed!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancelCreate" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="isLoading" (click)="createValidate()"><span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          <i class="fa fa-save" aria-hidden="true"></i> Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

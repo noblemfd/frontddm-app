@@ -13,6 +13,9 @@ export class PaymentFrequencyPipe implements PipeTransform {
       return 'Quarterly';
     }
     if (value == 3) {
+      return 'BiAnnual';
+    }
+    if (value == 4) {
       return 'Yearly';
     }
     return 'Monthly';

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule} from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
@@ -18,9 +21,17 @@ import { MandateByCustomerComponent } from './pages/mandate-by-customer/mandate-
 import { MandateDetailComponent } from './pages/mandates/mandate-detail/mandate-detail.component';
 import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
 import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
+import { MandateEditComponent } from './pages/mandates/mandate-edit/mandate-edit.component';
+import { MandateCreateComponent } from './pages/mandates/mandate-create/mandate-create.component';
+import { MandateCancelComponent } from './pages/mandates/mandate-cancel/mandate-cancel.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { CreateDashboardMandateComponent } from './pages/merchant-dashboard/create-dashboard-mandate/create-dashboard-mandate.component';
 
 
 @NgModule({
+  providers: [
+   // BsDatepickerConfig,
+  ],
   declarations: [
     MandatesComponent,
     MerchantDashboardComponent,
@@ -30,11 +41,18 @@ import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-ma
     MandateByCustomerComponent,
     MandateDetailComponent,
     CompletedPaymentsComponent,
-    ThisYearMandateComponent
+    ThisYearMandateComponent,
+    MandateEditComponent,
+    MandateCreateComponent,
+    MandateCancelComponent,
+    ProfileComponent,
+    CreateDashboardMandateComponent
   ],
   imports: [
     CommonModule,
     MerchantRoutingModule,
+   // BsDatepickerModule.forRoot(),
+  //  BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     FormsModule,
@@ -48,6 +66,7 @@ import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-ma
     ngxChartsPieModule,
     ngxChartsStackedModule,
     NgSelectModule,
+    NgOptionHighlightModule
   ]
 })
 export class MerchantModule { }

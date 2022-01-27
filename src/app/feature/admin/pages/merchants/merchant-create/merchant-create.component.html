@@ -1,1 +1,157 @@
-<p>merchant-create works!</p>
+<div role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add Merchant</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <form class="form-horizontal" id="add-form" [formGroup]="createMerchantForm" (ngSubmit)="onMerchantSubmitForm()">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="UserName">User Name<span style="color:red;">*</span></label>
+              <input type="text" class="form-control" formControlName='UserName' id="username" placeholder="Username">
+              <div *ngIf="fc['UserName'].touched && fc['UserName'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['UserName'].errors && fc['UserName'].errors['required']">Username is required!</div>
+                <div *ngIf="fc['UserName'].errors && fc['UserName'].errors['minlength']">Username cannot be less than 5 characters!</div>
+                <div *ngIf="fc['UserName'].errors && fc['UserName'].errors['maxlength']">Username cannot be more than 50 characters!</div>
+                <div *ngIf="fc['UserName'].errors && fc['UserName'].errors['cannotContainSpace']">Space not allowed in Username!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="MerchantName">Merchant Name<span style="color:red;">*</span></label>
+              <input type="text" class="form-control" formControlName='MerchantName' id="MerchantName" placeholder="Merchant Name">
+              <div *ngIf="fc['MerchantName'].touched && fc['MerchantName'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['MerchantName'].errors && fc['MerchantName'].errors['required']">Merchant Name is required!</div>
+                <div *ngIf="fc['MerchantName'].errors && fc['MerchantName'].errors['minlength']">Merchant Name cannot be less than 3 characters!</div>
+                <div *ngIf="fc['MerchantName'].errors && fc['MerchantName'].errors['maxlength']">Merchant Name cannot be more than 100 characters!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="AccountNumber">Account Number<span style="color:red;">*</span></label>
+              <input type="text" class="form-control" formControlName='AccountNumber' id="AccountNumber" placeholder="Account Number">
+              <div *ngIf="fc['AccountNumber'].touched && fc['AccountNumber'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['AccountNumber'].errors && fc['AccountNumber'].errors['required']">Account Number is required!</div>
+                <div *ngIf="fc['AccountNumber'].errors && fc['AccountNumber'].errors['minlength']">Account Number cannot be less than 5 characters!</div>
+                <div *ngIf="fc['AccountNumber'].errors && fc['AccountNumber'].errors['maxlength']">Account Number cannot be more than 50 characters!</div>
+                <div *ngIf="fc['AccountNumber'].errors && fc['AccountNumber'].errors['pattern']">Enter only numbers for Account Number!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="MobileNumber">Mobile Number</label>
+              <ngx-intl-tel-input
+                [cssClass]="'form-control mb-3'"
+                [preferredCountries]="preferredCountries"
+                [enableAutoCountrySelect]="false"
+                [enablePlaceholder]="true"
+                [searchCountryFlag]="true"
+                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                [selectFirstCountry]="false"
+                [selectedCountryISO]="CountryISO.Nigeria"
+                [phoneValidation]="true"
+                [separateDialCode]="true"
+                name="MobileNumber" formControlName="MobileNumber">
+              </ngx-intl-tel-input>
+              <div *ngIf="fc['MobileNumber'].touched && fc['MobileNumber'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['MobileNumber'].errors && fc['MobileNumber'].errors['maxlength']">Mobile Number cannot be more than 15 characters!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="ChargeRequired">Charges Required<span style="color:red;">*</span></label>
+              <ng-select [items]="chargeRequiredData"
+                [selectOnTab]="true"
+                [searchable]="true"
+                bindValue="key"
+                bindLabel="value"
+                placeholder="Select Charge Required"
+                [multiple]="false"
+                [clearable]="true"
+                [(ngModel)]="selectedChargeRequired"
+                formControlName="ChargeRequired">
+              </ng-select>
+              <div *ngIf="fc['ChargeRequired'].touched && fc['ChargeRequired'].invalid" class="alert alert-danger">
+                <div *ngIf="fc['ChargeRequired'].errors && fc['ChargeRequired'].errors['required']">The field is required!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <ng-container *ngIf="selectedChargeRequired == '1'">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="WhoToCharge">Who To Charge</label>
+                <ng-select [items]="whoToChargeData"
+                [selectOnTab]="true"
+                [searchable]="true"
+                bindValue="key"
+                bindLabel="value"
+                placeholder="Select Who To Charge"
+                [multiple]="false"
+                [clearable]="true"
+                formControlName="WhoToCharge">
+              </ng-select>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="selectedChargeRequired == '1'">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ChargeRequired">Charge Mode</label>
+                <ng-select [items]="chargeModeData"
+                  [selectOnTab]="true"
+                  [searchable]="true"
+                  bindValue="key"
+                  bindLabel="value"
+                  placeholder="Select Charge Required"
+                  [multiple]="false"
+                  [clearable]="true"
+                  [(ngModel)]="selectedChargeMode"
+                  formControlName="ChargeMode">
+                </ng-select>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="selectedChargeMode == '2'">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ChargePercent">Charge Percent</label>
+                <input type="text" formControlName="ChargePercent" class="form-control" id="ChargePercent" placeholder="Enter Charge Percent">
+                <div *ngIf="fc['ChargePercent'].touched && fc['ChargePercent'].invalid" class="alert alert-danger">
+                  <div *ngIf="fc['ChargePercent'].errors && fc['ChargePercent'].errors['numeric']">Only numeric value is Allowed!</div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="selectedChargeMode == '1'">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ChargeValue">Charge Value</label>
+                <input type="text" formControlName="ChargeValue" class="form-control" id="ChargeValue" placeholder="Enter Charge Value">
+                <div *ngIf="fc['ChargeValue'].touched && fc['ChargeValue'].invalid" class="alert alert-danger">
+                  <div *ngIf="fc['ChargeValue'].errors && fc['ChargeValue'].errors['numeric']">Only numeric value is Allowed!</div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancelCreate" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="isLoading" (click)="createValidate()"><span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          <i class="fa fa-save" aria-hidden="true"></i> Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

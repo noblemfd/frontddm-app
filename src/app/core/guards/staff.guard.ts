@@ -8,17 +8,14 @@ import { AuthService } from 'src/app/feature/auth/services/auth.service';
   providedIn: 'root'
 })
 export class StaffGuard implements CanActivate {
+  checkStatus!: boolean;
   constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem('role') === "Staff") {
-      return true;
-    }
-    this.router.navigate(['staff-dashboard']);
-    return false;
+      return this.checkStatus = this.authService.isStaff();
   }
 
 }

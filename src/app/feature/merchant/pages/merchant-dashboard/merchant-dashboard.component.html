@@ -41,7 +41,6 @@
           <div class="small-box bg-success">
             <div class="inner">
               <h5>Total: {{dashboardData?.completed_payment_count}}<sup style="font-size: 20px"></sup></h5>
-
               <p>Completed Payments</p>
             </div>
             <div class="icon">
@@ -107,7 +106,7 @@
                   </thead>
                   <tbody *ngIf="latestMandateList != undefined">
                   <tr *ngFor="let mandate of latestMandateList; let i = index;">
-                    <td><a href="pages/examples/invoice.html">{{ mandate?.reference_number || 'N/A' }}</a></td>
+                    <td>{{ mandate?.reference_number || 'N/A' }}</td>
                     <td>{{ mandate?.dr_account_number || 'N/A' }}</td>
                     <td>
                       <span class="badge" [ngClass]="(mandate?.payment_frequency == '1') ? 'bg-success' : (mandate?.payment_frequency == '2') ? 'bg-info' : 'bg-warning'">{{mandate?.payment_frequency | paymentFrequency }}</span>
@@ -125,7 +124,10 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-primary float-left"><i class="fas fa-plus"></i> Add New Mandate</a>
+              <button type="button" (click)="addNewMandate()"
+              class="btn btn-primary">
+                           <i class="fa fa-plus" aria-hidden="true"></i> Add New Mandate
+             </button>
               <a [routerLink]="['/merchant-dashboard/mandate-list']" class="btn btn-sm btn-secondary float-right"><i class="fas fa-search"></i> View All Mandates</a>
             </div>
           </div>
@@ -179,7 +181,7 @@
         <div class="col-md-6">
           <div class="card card-danger">
             <div class="card-header">
-              <h3 class="card-title">Payment Status Comparison</h3>
+              <h3 class="card-title">Current Year Mandate By Month</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -194,7 +196,7 @@
         <div class="col-md-6">
           <div class="card card-danger">
             <div class="card-header">
-              <h3 class="card-title">Bar Chart</h3>
+              <h3 class="card-title">Last 5 Years Mandate</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>

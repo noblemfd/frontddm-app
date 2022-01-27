@@ -28,15 +28,35 @@ export class MerchantService {
     return this.http.get<IMerchants[]>(this.baseUrl + 'admin/merchants');
   }
 
-  getMerchantById(merchantId: any): Observable<IMerchants> {
-    return this.http.get<IMerchants>(this.baseUrl + 'admin/merchant/' + merchantId);
+  getMerchantById1(merchantId: any): Observable<any> {
+    return this.http.get(this.baseUrl + 'admin/merchant/' + merchantId);
   }
 
+  getMerchantDetails(merchantId: number): Observable<IMerchants> {
+    return this.http.get(this.baseUrl + 'admin/merchant/' + merchantId)
+      .pipe(map((response: any) => {
+        return response.result;
+      }));
+  }
+
+  createMerchant(merchant: IMerchant): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post<IResponse<IMerchant>>(this.baseUrl + 'admin/merchant/add', merchant, httpOptions).pipe(
+      tap((response) => {
+        const data = response.results;
+        return data;
+      })
+    );
+  }
+ /*
+   createMerchant(data: any) {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post(this.baseUrl + 'admin/merchant/add', data, httpOptions);
+  }
   createMerchant(merchant: IMerchant): Observable<IMerchant> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http.post<IMerchant>(this.baseUrl + 'admin/merchant/add', merchant, httpOptions);
   }
- /*
   getAllMerchants(): Observable<any> {
     return this.http.get(this.baseUrl + 'admin/merchants', this.httpOptions);
   }

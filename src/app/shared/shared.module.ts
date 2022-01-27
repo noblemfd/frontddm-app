@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { LSelect2Module } from 'ngx-select2';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
@@ -30,6 +29,8 @@ import { NotificationTypePipe } from './pipes/notification-type.pipe';
 import { WhoToChargePipe } from './pipes/who-to-charge.pipe';
 import { PaymentFrequencyPipe } from './pipes/payment-frequency.pipe';
 import { MandateStatusPipe } from './pipes/mandate-status.pipe';
+import { NotificationRequiredPipe } from './pipe/notification-required.pipe';
+import { BackButtonDirective } from './directives/back-button.directive';
 
 
 @NgModule({
@@ -38,8 +39,7 @@ import { MandateStatusPipe } from './pipes/mandate-status.pipe';
     BsDatepickerConfig,
     BsDropdownConfig,
     BsModalService,
-    ProgressbarConfig,
-   // LSelect2Module
+    ProgressbarConfig
   ],
   imports: [
     AlertModule,
@@ -48,14 +48,11 @@ import { MandateStatusPipe } from './pipes/mandate-status.pipe';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-  //  BrowserModule,
-//BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     BsDropdownModule,
     PopoverModule,
-    ProgressbarModule,
-   // LSelect2Module
+    ProgressbarModule
   ],
   exports: [
     PaginationModule,
@@ -75,7 +72,7 @@ import { MandateStatusPipe } from './pipes/mandate-status.pipe';
     WhoToChargePipe,
     PaymentFrequencyPipe,
     MandateStatusPipe,
-  //  LSelect2Module
+    BsDatepickerModule,
   ],
   declarations: [
     MandateSummaryComponent,
@@ -95,7 +92,9 @@ import { MandateStatusPipe } from './pipes/mandate-status.pipe';
     NotificationTypePipe,
     WhoToChargePipe,
     PaymentFrequencyPipe,
-    MandateStatusPipe
+    MandateStatusPipe,
+    NotificationRequiredPipe,
+    BackButtonDirective
   ],
 })
 export class SharedModule { }

@@ -30,11 +30,19 @@ export class MandateService {
   }
 
   getMandateById(mandateId: any): Observable<IMandates> {
-    return this.http.get<IMandates>(this.baseUrl + 'admin/mandate/' + mandateId);
+    return this.http.get<IMandates>(this.baseUrl + 'admin/mandates/' + mandateId);
   }
 
   getAllMandateSchedules(): Observable<IMandateSchedules[]> {
     return this.http.get<IMandateSchedules[]>(this.baseUrl + 'admin/mandates/mandate-with-details');
+  }
+
+  getCompletedPayments(): Observable<IMandates[]> {
+    return this.http.get<IMandates[]>(this.baseUrl + 'admin/mandates/completed-payments');
+  }
+
+  getThisYearMandates(): Observable<IMandates[]> {
+    return this.http.get<IMandates[]>(this.baseUrl + 'admin/mandates/this-year-mandate');
   }
 
 }

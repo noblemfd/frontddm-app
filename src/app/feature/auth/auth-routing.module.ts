@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../../feature/auth/login/login.component';
 import { AuthComponent } from '../../feature/auth/auth.component';
 import { MustChangePasswordComponent } from './must-change-password/must-change-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
 {
@@ -17,7 +19,13 @@ const routes: Routes = [
   },
   {
     path: 'must-change-password',
+    canActivate: [AuthGuard],
     component: MustChangePasswordComponent
+  },
+  {
+    path: 'change-password',
+    canActivate: [AuthGuard],
+    component: ChangePasswordComponent
   }
 ]
 }

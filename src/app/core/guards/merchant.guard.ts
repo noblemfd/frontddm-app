@@ -8,17 +8,14 @@ import { AuthService } from 'src/app/feature/auth/services/auth.service';
   providedIn: 'root'
 })
 export class MerchantGuard implements CanActivate {
+  checkStatus!: boolean;
   constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem('role') === 'Merchant') {
-      return true;
-    }
-    this.router.navigate(['/merchant-dashboard']);
-    return false;
+    return this.checkStatus = this.authService.isMerchant();
   }
 
 }

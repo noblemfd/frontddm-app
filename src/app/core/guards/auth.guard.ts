@@ -20,10 +20,13 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.authService.isLoggedIn()) {
+   // if (!localStorage.getItem('token')) {
+      // not logged in, so redirect to login page with the return url
       this.toastr.info('Please Log In!');
       this.router.navigate(['/auth']);
       return false;
     }
+    // logged in, so return true
     this.authService.isLoggedIn();
     return true;
   }

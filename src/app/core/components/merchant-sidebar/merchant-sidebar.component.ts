@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./merchant-sidebar.component.scss']
 })
 export class MerchantSidebarComponent implements OnInit {
+  userName = localStorage.getItem('username');
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getUserName() {
+    return this.userName;
+  }
 }

@@ -13,13 +13,15 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { MustChangePasswordComponent } from './must-change-password/must-change-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
-    MustChangePasswordComponent
+    MustChangePasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

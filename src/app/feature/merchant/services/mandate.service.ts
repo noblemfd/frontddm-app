@@ -30,28 +30,19 @@ export class MandateService {
   }
 
   getMandateById(mandateId: any): Observable<IMandates> {
-    return this.http.get<IMandates>(this.baseUrl + 'merchant/mandate/' + mandateId);
+    return this.http.get<IMandates>(this.baseUrl + 'merchant/mandates/' + mandateId);
   }
 
-  createMandate(mandate: IMandate): Observable<IMandate> {
+  createMandate(mandate: IMandate): Observable<any> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<IMandate>(this.baseUrl + 'merchant/mandate/add', mandate, httpOptions);
-  }
- /*
-  getAllMerchants(): Observable<any> {
-    return this.http.get(this.baseUrl + 'admin/merchants', this.httpOptions);
+    return this.http.post<IResponse<IMandate>>(this.baseUrl + 'merchant/mandate/add', mandate, httpOptions).pipe(
+      tap((response) => {
+        const data = response.results;
+        return data;
+      })
+    );
   }
 
-  updateMerchant(merchant: IMerchant): Observable<IMerchant> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<IMerchant>(this.baseUrl + 'admin/merchant/update/', merchant, httpOptions);
-  }
-
-  deleteMerchantById(merchantid: string): Observable<number> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.baseUrl + 'admin/merchant/delete?id=' + merchantid, httpOptions);
-  }
-*/
   getAllMandateSchedules(): Observable<IMandateSchedules[]> {
     return this.http.get<IMandateSchedules[]>(this.baseUrl + 'merchant/mandates/mandate-with-details');
   }

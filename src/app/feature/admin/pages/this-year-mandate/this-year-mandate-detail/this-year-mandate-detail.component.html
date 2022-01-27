@@ -1,0 +1,135 @@
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Admin Dashboard: {{ pageTitle }}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin-dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item active">{{ pageTitle }}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-xs-6 col-6 ">
+
+        </div>
+        <div class="col-sm-6 col-xs-6 col-6  text-right">
+          <div class="btn-group btn-group-sm" role="group">
+            <a [routerLink]="['/admin-dashboard/this-year-mandates']" class="btn btn-secondary" title=" Back">
+                <span> Back to Mandates List</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-xs-12 col-12">
+          <div class="card card-danger">
+            <div class="card-header">
+              <h3 class="card-title">{{ pageTitle }} </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body" *ngIf="mandate != undefined">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      Merchant Name: <strong>{{mandate?.merchant?.merchant_name || 'N/A' }}</strong>
+                    </div>
+                    <div class="col-md-4">
+                      Ref. No.: <strong>{{mandate?.reference_number || 'N/A' }}</strong>
+                    </div>
+                    <div class="col-md-4">
+                      Account No.: <strong>{{mandate?.dr_account_number || 'N/A' }}</strong>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      Payment Frequency:
+                      <span *ngIf="mandate?.payment_frequency === 1" class="badge bg-success">Monthly</span>
+                      <span *ngIf="mandate?.payment_frequency === 2" class="badge bg-info">Quaterly</span>
+                      <span *ngIf="mandate?.payment_frequency === 3" class="badge bg-warning">BiAnnual</span>
+                      <span *ngIf="mandate?.payment_frequency === 4" class="badge bg-danger">Yearly</span>
+                    </div>
+                    <div class="col-md-4">
+                      Start Date: <strong>{{ mandate?.start_date | date: 'dd-MM-yyyy' || 'N/A' }}</strong>
+                    </div>
+                    <div class="col-md-4">
+                      End Date: <strong>{{ mandate?.end_date | date: 'dd-MM-yyyy' || 'N/A' }}</strong>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      Amount: <strong>{{ mandate?.amount | currency: 'N' }}</strong>
+                    </div>
+                    <div class="col-md-4">
+                      Approved:
+                      <span class="badge" [ngClass]="(mandate?.is_approved == '1') ? 'bg-success' : 'bg-danger'">{{mandate?.is_approved | toTrue }}</span>
+                    </div>
+                    <div class="col-md-4">
+                      Posted Date: <strong>{{mandate?.created_date | date: 'dd-MM-yyyy' || 'N/A' }}</strong>
+                    </div>
+                  </div>
+                </div>
+              </div><br>
+              <div class="row">
+                <h3 class="card-title"><strong>Mandate Schedules</strong></h3>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="card-body p-0">
+                      <table class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%">SN.</th>
+                                <th style="width: 40%">Payable Amount</th>
+                                <th style="width: 15%">Due Date</th>
+                                <th style="width: 20%">Mandate Status</th>
+                                <th style="width: 15%">Processed Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="mandate.mandate_details != undefined">
+                            <tr *ngFor="let details of mandate.mandate_details">
+                                <td>{{ details?.serial_number || 'N/A' }}</td>
+                                <td>{{ details.payable_amount | currency: 'N' }}</td>
+                                <td>{{ details.due_date | date: 'dd-MMM-yyyy' || 'N/A' }}</td>
+                                <td>
+                                  <span *ngIf="details.mandate_status === 0" class="badge bg-info">Pending</span>
+                                  <span *ngIf="details.mandate_status === 1" class="badge bg-danger">Failed</span>
+                                  <span *ngIf="details.mandate_status === 2" class="badge bg-success">Processed</span>
+                                </td>
+                                <td>{{ ((details.processed_date !== '0001-01-01T00:00:00') ? (details.processed_date | date: 'dd-MMM-yyyy' || 'N/A') : 'N/A') }}</td>
+                            </tr>
+                            <tr *ngIf="!mandate.mandate_details">
+                                <td colspan="5" class="text-center">
+                                    <span class="spinner-border spinner-border-lg align-center"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a [routerLink]="['/admin-dashboard/this-year-mandates']" class="btn btn-secondary" title=" Close">
+                <span> Close</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

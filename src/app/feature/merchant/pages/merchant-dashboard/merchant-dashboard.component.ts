@@ -7,7 +7,9 @@ import { take } from 'rxjs/operators';
 import { DashboardService } from 'src/app/feature/merchant/services/dashboard.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDashboardCount } from '../../models/dashboard-count.model';
-import { Observable } from 'rxjs';
+import { IMandate, IMandates, IResponse } from '../../models/mandates.model';
+import { CreateDashboardMandateComponent } from '../../pages/merchant-dashboard/create-dashboard-mandate/create-dashboard-mandate.component';
+
 
 @Component({
   selector: 'app-merchant-dashboard',
@@ -18,13 +20,14 @@ export class MerchantDashboardComponent implements OnInit {
 
   pageTitle = 'Merchant Dashboard';
   pageLabel = 'Dashboard Overview';
+  bsModalRef?: BsModalRef;
   public dashboardData!: IDashboardCount;
   latestMandateList: any[] = [];
+  mandate!: IMandate;
 
   constructor(
     private fb: FormBuilder,
     private dashboardService: DashboardService,
-    private router: Router,
     private toastr: ToastrService,
     private modalService: BsModalService
   ) { }
@@ -48,9 +51,7 @@ export class MerchantDashboardComponent implements OnInit {
   loadLatestMandates(){
     this.dashboardService.getLatestMandates().subscribe({
       next: (res: any) => {
-        console.log(res);
         this.latestMandateList = res.result;
-        console.log(this.latestMandateList);
       },
       error: (error) => {
         this.toastr.error(error.message);
@@ -58,4 +59,7 @@ export class MerchantDashboardComponent implements OnInit {
     })
   }
 
+  addNewMandate() {
+    this.bsModalRef = this.modalService.show(CreateDashboardMandateComponent, Object.assign({}, { class: 'gray modal-lg'}));
+  }
 }

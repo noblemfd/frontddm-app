@@ -49,47 +49,11 @@ export class AuthComponent implements OnInit {
     })
   }
 
-  login1(){
-    this.isLoading = true;
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        this.tokenHandler(res);
-      },
-      error: (error) => {
-
-        this.toastr.error(error.message);
-        this.isLoading = false;
-      }
-    })
-  }
-
-  login2(){
-    this.authService.login(this.loginForm.value).subscribe(res=>{
-      this.router.navigateByUrl('/');
-    }, error=>{
-      console.log(error);
-      this.toastr.error(error.error);
-    })
-  }
-
-    tokenHandler(data: any){
-     // this.toastr.success('Successfully Logged In');
-    //  console.log(data);
-      this.toastr.success(data.message);
-      if (data.result.roles[0].name == 'Admin'){
-        this.router.navigateByUrl('/admin-dashboard');
-      } else if (data.result.roles[0].name == 'Merchant'){
-        this.router.navigateByUrl('/merchant-dashboard');
-      } else {
-        this.router.navigateByUrl('/customer-dashboard');
-      }
-    }
-
     login(){
       this.authService.login(this.loginForm.value).subscribe({
         next: (res: any) => {
-        //  if (res.result.is_password_changed == true) {
-        //  if (this.isPasswordChanged == true) {
+          if (res.result.user.is_password_changed) {
+        //  if (this.isPasswordChanged) {
             this.toastr.success(res.message);
             if (res.result.roles[0] == 'Admin'){
               this.router.navigateByUrl('/admin-dashboard');
@@ -98,10 +62,10 @@ export class AuthComponent implements OnInit {
             } else {
               this.router.navigateByUrl('/customer-dashboard');
             }
-         // } else {
-          //  this.toastr.info('Kindly reset your password');
-         //   this.router.navigateByUrl('/auth/must-change-password');
-         // }
+          } else {
+            this.toastr.info('Kindly change your password');
+            this.router.navigateByUrl('/auth/must-change-password');
+          }
           localStorage.clear();
           localStorage.setItem('currentUser', JSON.stringify(res.result));
           //localStorage.setItem('token', JSON.stringify(res.result.token));

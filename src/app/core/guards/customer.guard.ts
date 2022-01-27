@@ -8,17 +8,14 @@ import { AuthService } from 'src/app/feature/auth/services/auth.service';
   providedIn: 'root'
 })
 export class CustomerGuard implements CanActivate {
+  checkStatus!: boolean;
   constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   canActivate(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot
       ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (localStorage.getItem('role') === "Customer") {
-        return true;
-      }
-      this.router.navigate(['customer-dashboard']);
-      return false;
+        return this.checkStatus = this.authService.isCustomer();
     }
 
   }

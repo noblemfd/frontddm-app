@@ -14,9 +14,6 @@ export class MustChangePasswordComponent implements OnInit {
   changePasswordForm!: FormGroup;
   isLoading = false;
   isSubmitted = false;
-  // CurrentPassword!: FormControl;
-  // NewPassword!: FormControl;
-  // ConfirmNewPassword!: FormControl;
 
   constructor(
     private authService: AuthService,

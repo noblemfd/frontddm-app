@@ -36,10 +36,7 @@
 
                     </div>
                     <div class="col-sm-6 col-xs-6 col-6  text-right">
-                    <!--  <button type="button" [routerLink]="['/company-dashboard/vehicle-add']"
-                       class="btn btn-primary">
-                                    <i class="fa fa-plus" aria-hidden="true"></i> Add New Vehicle
-                      </button>-->
+
                     </div>
                   </div>
                 </ngx-caption>
@@ -68,7 +65,7 @@
                 </ng-template>
 
                 <ng-template #paymentFrequencyTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
-                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : (columnValue == '2') ? 'bg-info' : 'bg-warning'">{{columnValue | paymentFrequency }}</span>
+                  <span class="badge" [ngClass]="(columnValue == '1') ? 'bg-success' : (columnValue == '2') ? 'bg-info' : (columnValue == '3') ? 'bg-warning': 'bg-danger'">{{columnValue | paymentFrequency }}</span>
                 </ng-template>
 
                 <ng-template #amountTpl let-row let-rowIndex="rowIndex" let-columnValue="columnValue">

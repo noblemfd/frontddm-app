@@ -1,4 +1,4 @@
-export const NOTIFICATION_RESPONSE_DATA = [
+export const PAYMENT_FREQUENCY_DATA = [
   {
     'key': 1,
     'value': 'Monthly'
@@ -9,6 +9,10 @@ export const NOTIFICATION_RESPONSE_DATA = [
   },
   {
     'key': 3,
+    'value': 'BiAnnual'
+  },
+  {
+    'key': 4,
     'value': 'Yearly'
   }
 ]

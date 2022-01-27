@@ -9,18 +9,18 @@ export interface IMerchant {
   MerchantName: string;
   AccountNumber: string;
   UserName: string;
-  MobileNumber: string;
-  MerchantStatus: number;
-  NotificationRequired: number;
-  NotificationUrl: string;
-  NotificationCredential: string;
-  ChargeRequired: number;
-  ChargeMode: number;
-  WhoToCharge: number;
-  ChargePercent: number;
-  ChargeValue: number;
-  MinChargeValue: number;
-  MaxChargeValue: number;
+  MobileNumber?: string;
+  MerchantStatus?: number;
+  NotificationRequired?: number;
+  NotificationUrl?: string;
+  NotificationCredential?: string;
+  ChargeRequired?: number;
+  ChargeMode?: number;
+  WhoToCharge?: number;
+  ChargePercent?: number;
+  ChargeValue?: number;
+  MinChargeValue?: number;
+  MaxChargeValue?: number;
 }
 
 export interface IMerchants {

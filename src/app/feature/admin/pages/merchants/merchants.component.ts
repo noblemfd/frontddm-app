@@ -1,18 +1,15 @@
 import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { WHO_TO_CHARGE_DATA } from 'src/app/core/enum/whotocharge';
 import { CHARGE_MODE_DATA } from 'src/app/core/enum/chargemode';
+import { CHARGE_REQUIRED_DATA } from 'src/app/core/enum/chargerequired';
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { MerchantService } from 'src/app/feature/admin/services/merchant.service';
-import { UsernameValidator } from 'src/app/shared/validators/username-validator';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Pagination, PaginatedResult } from 'src/app/shared/models/pagination';
 import { IMerchant, IMerchants, IResponse } from '../../models/merchants.model';
-import { Observable } from 'rxjs';
+import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+import { MerchantCreateComponent } from '../merchants/merchant-create/merchant-create.component';
 
 @Component({
   selector: 'app-merchants',
@@ -24,6 +21,8 @@ export class MerchantsComponent implements OnInit {
   @ViewChild('addressTpl', { static: true }) addressTpl!: TemplateRef<any>;
   @ViewChild('notificationRequiredTpl', { static: true }) notificationRequiredTpl!: TemplateRef<any>;
   @ViewChild('merchantStatusTpl', { static: true }) merchantStatusTpl!: TemplateRef<any>;
+  @ViewChild('userNameTpl', { static: true }) userNameTpl!: TemplateRef<any>;
+  @ViewChild('mobileNumberTpl', { static: true }) mobileNumberTpl!: TemplateRef<any>;
   @ViewChild('idTpl', { static: true }) idTpl!: TemplateRef<any>;
 
   bsModalRef?: BsModalRef;
@@ -31,9 +30,8 @@ export class MerchantsComponent implements OnInit {
   pageLabel = 'Merchant List';
   allMerchantList: any[] = [];
  // allMerchantList!: Observable<IMerchants[]>;
-  createForm!: FormGroup;
-  editForm!: FormGroup;
   merchant!: IMerchant;
+  merchantList: any;
   isSubmitted = false;
   options = {};
   data1 = [];
@@ -42,9 +40,14 @@ export class MerchantsComponent implements OnInit {
   columnsWithFeatures:any
   isLoading = false;
   showModal!: boolean;
+	SearchCountryField = SearchCountryField;
+	CountryISO = CountryISO;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+  chargeRequiredData!: any[];
+  chargeModeData!: any[];
+  whoToChargeData!: any[];
 
   constructor(
-    private fb: FormBuilder,
     private merchantService: MerchantService,
     private router: Router,
     private toastr: ToastrService,
@@ -55,6 +58,9 @@ export class MerchantsComponent implements OnInit {
     this.isLoading = true;
     this.loadDatatable();
     this.loadAllMerchants();
+    this.chargeRequiredData = CHARGE_REQUIRED_DATA;
+    this.chargeRequiredData = CHARGE_MODE_DATA;
+    this.whoToChargeData = WHO_TO_CHARGE_DATA;
   }
 
   loadDatatable(){
@@ -90,12 +96,12 @@ export class MerchantsComponent implements OnInit {
         sorting: true
       },
       {
-        key: 'mobile_number',
+        key: 'user',
         title:
           '<div class="blue"><i class="fa fa-phone"></i> Mobile No.</div>',
         width: 100,
         sorting: true,
-       // cellTemplate: this.vehiclemodelTpl,
+        cellTemplate: this.mobileNumberTpl,
         align: {
           head: 'center',
           body: 'center'
@@ -138,10 +144,8 @@ export class MerchantsComponent implements OnInit {
   loadAllMerchants(){
     this.merchantService.getAllMerchants().subscribe({
       next: (res: any) => {
-      //  console.log(res);
         this.allMerchantList = res.result;
         this.isLoading = false;
-      //  console.log(this.allMerchantList);
       },
       error: (error) => {
         this.toastr.error(error.message);
@@ -150,27 +154,8 @@ export class MerchantsComponent implements OnInit {
     })
   }
 
-  createMerchant() {
-    this.createForm = this.fb.group({
-      UserName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), UsernameValidator.cannotContainSpace]],
-      MerchantName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      AccountNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    });
-  }
-
-  createValidate() {
-    if(!this.createForm.valid) {
-      this.createForm.markAllAsTouched();
-      return;
-    }
-  }
-
-  addMerchantData(templateAdd: TemplateRef<any>) {
-    this.bsModalRef = this.modalService.show(templateAdd,
-      Object.assign({}, { class: 'gray modal-lg'}));
-  }
-
-  submitCreateForm() {
+  addNewMerchant() {
+    this.bsModalRef = this.modalService.show(MerchantCreateComponent, Object.assign({}, { class: 'gray modal-lg'}));
   }
 
   removeMerchantData(rowIndex: any) {}
@@ -180,10 +165,17 @@ export class MerchantsComponent implements OnInit {
     this.merchant = row;
   }
 
+/*
   viewMerchantData(row: any) {
    // this.router.navigate(['/company-dashboard/vehicle-detail', row.id]);
     this.merchant = row;
+    this.bsModalRef = this.modalService.show(MerchantDetailComponent, Object.assign({}, { class: 'gray modal-lg'}));
   }
+*/
+viewMerchantData(templateDetail: TemplateRef<any>, row: any) {
+   this.merchantList = row;
+   this.bsModalRef = this.modalService.show(templateDetail, Object.assign({}, { class: 'gray modal-lg'}));
+ }
 
   onClose(){
     this.bsModalRef?.hide();
