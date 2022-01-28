@@ -33,4 +33,12 @@ export class DashboardService {
   getLatestMandates(): Observable<IMandates[]> {
     return this.http.get<IMandates[]>(this.baseUrl + 'admin/mandates/latest-mandate');
   }
+
+  getCurrentYearMonthlyMandateChart() {
+    return this.http.get(this.baseUrl + 'admin/dashboard/current-year-monthly-mandate');
+  }
+
+  getLastFiveYearMandateChart() {
+    return this.http.get(this.baseUrl + 'admin/dashboard/last-five-year-mandate');
+  }
 }

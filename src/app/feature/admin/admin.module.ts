@@ -6,6 +6,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
 import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
@@ -51,6 +52,7 @@ import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-y
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
     RxReactiveFormsModule,
     NgxIntlTelInputModule,
     NgxDatatableModule,

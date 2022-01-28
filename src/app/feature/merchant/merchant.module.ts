@@ -7,6 +7,7 @@ import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
 import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
@@ -58,6 +59,7 @@ import { CreateDashboardMandateComponent } from './pages/merchant-dashboard/crea
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
+    NgChartsModule,
     NgxIntlTelInputModule,
     NgxDatatableModule,
     ngxChartsBarModule,
