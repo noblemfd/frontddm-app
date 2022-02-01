@@ -29,9 +29,11 @@ import { NotificationTypePipe } from './pipes/notification-type.pipe';
 import { WhoToChargePipe } from './pipes/who-to-charge.pipe';
 import { PaymentFrequencyPipe } from './pipes/payment-frequency.pipe';
 import { MandateStatusPipe } from './pipes/mandate-status.pipe';
-import { NotificationRequiredPipe } from './pipe/notification-required.pipe';
+import { NotificationRequiredPipe } from './pipes/notification-required.pipe';
 import { BackButtonDirective } from './directives/back-button.directive';
-
+import { ExcelExportService } from './services/excel-export.service';
+import { PdfScriptService } from './services/pdf-script.service';
+import { DatePipe } from '../../../node_modules/@angular/common';
 
 @NgModule({
   providers: [
@@ -39,7 +41,10 @@ import { BackButtonDirective } from './directives/back-button.directive';
     BsDatepickerConfig,
     BsDropdownConfig,
     BsModalService,
-    ProgressbarConfig
+    ProgressbarConfig,
+    ExcelExportService,
+    PdfScriptService,
+    DatePipe
   ],
   imports: [
     AlertModule,
@@ -72,7 +77,7 @@ import { BackButtonDirective } from './directives/back-button.directive';
     WhoToChargePipe,
     PaymentFrequencyPipe,
     MandateStatusPipe,
-    BsDatepickerModule,
+    BsDatepickerModule
   ],
   declarations: [
     MandateSummaryComponent,

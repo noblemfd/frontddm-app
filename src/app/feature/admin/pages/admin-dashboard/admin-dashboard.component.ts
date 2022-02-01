@@ -79,7 +79,6 @@ export class AdminDashboardComponent implements OnInit {
     this.dashboardService.getCurrentYearMonthlyMandateChart().subscribe({
       next: (res: any) => {
         this.currentYearChartResult = res;
-        console.log(this.currentYearChartResult);
         this.currentYearChartMonth = this.currentYearChartResult.map(x => x['month']);
         this.currentYearChartSum = this.currentYearChartResult.map(y => y['item_sum']);
         this.currentYearChart = new Chart('monthCanvas', {
@@ -105,6 +104,7 @@ export class AdminDashboardComponent implements OnInit {
                   'rgba(30, 169, 224, 0.8)'
                   //'rgba(0, 0, 0, 0.1)',
                   //'rgba(77,83,96,0.2)','rgba(30, 169, 224, 0.8)'
+                  //'rgba(93, 175, 89, 0.1)',
                 ],
                 borderColor: [
                   'rgb(255, 99, 132)',

@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
-import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
+//import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
@@ -56,11 +56,11 @@ import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-y
     RxReactiveFormsModule,
     NgxIntlTelInputModule,
     NgxDatatableModule,
-    ngxChartsBarModule,
-    ngxChartsLineModule,
-    ngxChartsComboModule,
-    ngxChartsPieModule,
-    ngxChartsStackedModule,
+  //  ngxChartsBarModule,
+  //  ngxChartsLineModule,
+  //  ngxChartsComboModule,
+  //  ngxChartsPieModule,
+  //  ngxChartsStackedModule,
     NgSelectModule,
     NgOptionHighlightModule
   ]

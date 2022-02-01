@@ -28,6 +28,10 @@ export class MerchantService {
     return this.http.get<IMerchants[]>(this.baseUrl + 'admin/merchants');
   }
 
+  getAllMerchants1(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'admin/merchants');
+  }
+
   getMerchantById1(merchantId: any): Observable<any> {
     return this.http.get(this.baseUrl + 'admin/merchant/' + merchantId);
   }

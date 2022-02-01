@@ -16,7 +16,7 @@ import { NgChartsModule } from 'ng2-charts';
 //import { AuthService } from './feature/auth/services/auth.service';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
-import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
+//import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
 
 
 @NgModule({
@@ -35,11 +35,11 @@ import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChart
     NgxSpinnerModule,
     RxReactiveFormsModule,
     NgxDatatableModule,
-    ngxChartsBarModule,
-    ngxChartsLineModule,
-    ngxChartsComboModule,
-    ngxChartsPieModule,
-    ngxChartsStackedModule,
+  //  ngxChartsBarModule,
+  //  ngxChartsLineModule,
+  //  ngxChartsComboModule,
+  //  ngxChartsPieModule,
+  //  ngxChartsStackedModule,
     NgSelectModule,
   ],
   providers: [
