@@ -86,7 +86,7 @@ export class MerchantDashboardComponent implements OnInit {
       next: (res: any) => {
         this.currentYearChartResult = res;
         console.log(this.currentYearChartResult);
-        this.currentYearChartMonth = this.currentYearChartResult.map(x => x['month']);
+        this.currentYearChartMonth = this.currentYearChartResult.map(x => x['month_name']);
         this.currentYearChartSum = this.currentYearChartResult.map(y => y['item_sum']);
         this.currentYearChart = new Chart('monthCanvas', {
           type: 'bar',
@@ -135,7 +135,7 @@ export class MerchantDashboardComponent implements OnInit {
       next: (res: any) => {
         this.fiveYearChartResult = res;
         this.fiveYearChartYear = this.fiveYearChartResult.map(x => x['year']);
-        this.fiveYearChartTotal = this.fiveYearChartResult.map(y => y['item_total']);
+        this.fiveYearChartTotal = this.fiveYearChartResult.map(y => y['item_percent']);
         this.fiveYearChart = new Chart('yearCanvas', {
           type: 'doughnut',
           data: {
