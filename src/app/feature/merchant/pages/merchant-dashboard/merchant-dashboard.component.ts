@@ -85,7 +85,6 @@ export class MerchantDashboardComponent implements OnInit {
     this.dashboardService.getCurrentYearMonthlyMandateChart().subscribe({
       next: (res: any) => {
         this.currentYearChartResult = res;
-        console.log(this.currentYearChartResult);
         this.currentYearChartMonth = this.currentYearChartResult.map(x => x['month_name']);
         this.currentYearChartSum = this.currentYearChartResult.map(y => y['item_sum']);
         this.currentYearChart = new Chart('monthCanvas', {
