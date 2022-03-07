@@ -117,7 +117,7 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    if (localStorage.getItem("role") === "Admin") {
+    if ((localStorage.getItem("role") === "Admin") || (localStorage.getItem("role") === "BankUser")) {
       return true
     } else {
       this.toastr.info('Forbidden!');
@@ -127,7 +127,7 @@ export class AuthService {
   }
 
   public isMerchant(): boolean {
-    if (localStorage.getItem("role") === "Merchant") {
+    if ((localStorage.getItem("role") === "Merchant") || (localStorage.getItem("role") === "MerchantUser")) {
       return true
     } else {
       this.toastr.info('Forbidden!');
@@ -146,8 +146,18 @@ export class AuthService {
     };
   }
 
-  public isStaff(): boolean {
-    if (localStorage.getItem("role") === "Staff") {
+  public isBankUser(): boolean {
+    if (localStorage.getItem("role") === "BankUser") {
+      return true
+    } else {
+      this.toastr.info('Forbidden!');
+      this.router.navigate(['/auth']);
+      return false;
+    };
+  }
+
+  public isMerchantUser(): boolean {
+    if (localStorage.getItem("role") === "MerchantUser") {
       return true
     } else {
       this.toastr.info('Forbidden!');

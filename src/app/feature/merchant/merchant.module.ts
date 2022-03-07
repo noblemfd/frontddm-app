@@ -27,6 +27,8 @@ import { MandateCreateComponent } from './pages/mandates/mandate-create/mandate-
 import { MandateCancelComponent } from './pages/mandates/mandate-cancel/mandate-cancel.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateDashboardMandateComponent } from './pages/merchant-dashboard/create-dashboard-mandate/create-dashboard-mandate.component';
+import { MerchantUserComponent } from './pages/merchant-user/merchant-user.component';
+import { MerchantUserCreateComponent } from './pages/merchant-user/merchant-user-create/merchant-user-create.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { CreateDashboardMandateComponent } from './pages/merchant-dashboard/crea
     MandateCreateComponent,
     MandateCancelComponent,
     ProfileComponent,
-    CreateDashboardMandateComponent
+    CreateDashboardMandateComponent,
+    MerchantUserComponent,
+    MerchantUserCreateComponent
   ],
   imports: [
     CommonModule,

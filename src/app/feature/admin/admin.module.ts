@@ -26,6 +26,8 @@ import { MandateScheduleDetailComponent } from './pages/mandate-schedules/mandat
 import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
 import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
 import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-year-mandate-detail/this-year-mandate-detail.component';
+import { MerchantUsersComponent } from './pages/merchant-users/merchant-users.component';
+import { MerchantUsersDetailComponent } from './pages/merchant-users/merchant-users-detail/merchant-users-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-y
     MandateScheduleDetailComponent,
     CompletedPaymentsComponent,
     ThisYearMandateComponent,
-    ThisYearMandateDetailComponent
+    ThisYearMandateDetailComponent,
+    MerchantUsersComponent,
+    MerchantUsersDetailComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { PaginatedResult } from 'src/app/shared/models/pagination';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { IMerchantsWithUsers } from '../models/merchants-with-users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -75,4 +76,15 @@ export class MerchantService {
     return this.http.delete<number>(this.baseUrl + 'admin/merchant/delete?id=' + merchantid, httpOptions);
   }
 */
+getAllMerchantUsers(): Observable<IMerchantsWithUsers[]> {
+  return this.http.get<IMerchantsWithUsers[]>(this.baseUrl + 'admin/merchants/merchants-with-users');
+}
+
+getMerchantUserDetails(merchantId: number): Observable<IMerchantsWithUsers> {
+  return this.http.get(this.baseUrl + 'admin/merchant/merchant-with-user/' + merchantId)
+    .pipe(map((response: any) => {
+      return response.result;
+    }));
+}
+
 }

@@ -10,12 +10,14 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { NgSelectModule} from '@ng-select/ng-select';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 //import { AuthModule } from './feature/auth/auth.module';
 //import { AuthService } from './feature/auth/services/auth.service';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
+import { NgxBootstrapSwitchModule } from 'ngx-bootstrap-switch';
 //import { ngxChartsBarModule, ngxChartsLineModule, ngxChartsComboModule, ngxChartsPieModule, ngxChartsStackedModule } from '@tusharghoshbd/ngx-charts';
 
 
@@ -28,7 +30,7 @@ import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-  //  AuthModule,
+    SharedModule,
     CoreModule,
     FormsModule,
     NgChartsModule,
@@ -41,6 +43,7 @@ import { NgxDatatableModule } from '@tusharghoshbd/ngx-datatable';
   //  ngxChartsPieModule,
   //  ngxChartsStackedModule,
     NgSelectModule,
+    NgxBootstrapSwitchModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

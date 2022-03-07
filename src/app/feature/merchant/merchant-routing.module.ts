@@ -11,7 +11,7 @@ import { MandateDetailComponent } from './pages/mandates/mandate-detail/mandate-
 import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
 import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-
+import { MerchantUserComponent } from './pages/merchant-user/merchant-user.component';
 
 const routes: Routes = [
   {path: '',
@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: '',
     component: MerchantDashboardComponent
+  },
+  {
+    path: 'merchant-users-list',
+    component: MerchantUserComponent
   },
   {
     path: 'mandate-list',

@@ -70,17 +70,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="ChargeRequired">Charges Required<span style="color:red;">*</span></label>
-              <ng-select [items]="chargeRequiredData"
-                [selectOnTab]="true"
-                [searchable]="true"
-                bindValue="key"
-                bindLabel="value"
-                placeholder="Select Charge Required"
-                [multiple]="false"
-                [clearable]="true"
+              <select class="form-control select2"
+                formControlName="ChargeRequired"
                 [(ngModel)]="selectedChargeRequired"
-                formControlName="ChargeRequired">
-              </ng-select>
+                placeholder="Select Charge Required"
+                style="width: 100%;">
+                <option [value]="null" disabled="disabled">Select Charge Required</option>
+                <option *ngFor="let item of chargeRequiredData" [value]="item.key">{{item.value}}</option>
+              </select>
               <div *ngIf="fc['ChargeRequired'].touched && fc['ChargeRequired'].invalid" class="alert alert-danger">
                 <div *ngIf="fc['ChargeRequired'].errors && fc['ChargeRequired'].errors['required']">The field is required!</div>
               </div>
@@ -91,35 +88,29 @@
           <ng-container *ngIf="selectedChargeRequired == '1'">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="WhoToCharge">Who To Charge</label>
-                <ng-select [items]="whoToChargeData"
-                [selectOnTab]="true"
-                [searchable]="true"
-                bindValue="key"
-                bindLabel="value"
-                placeholder="Select Who To Charge"
-                [multiple]="false"
-                [clearable]="true"
-                formControlName="WhoToCharge">
-              </ng-select>
+                <label for="ChargeMode">Charge Mode</label>
+                <select class="form-control select2"
+                  formControlName="ChargeMode"
+                  placeholder="Select Charge Mode"
+                  [(ngModel)]="selectedChargeMode"
+                  style="width: 100%;">
+                  <option [value]="null" disabled="disabled">Select Charge Mode</option>
+                  <option *ngFor="let item of chargeModeData" [value]="item.key">{{item.value}}</option>
+                </select>
               </div>
             </div>
           </ng-container>
           <ng-container *ngIf="selectedChargeRequired == '1'">
             <div class="col-md-4">
               <div class="form-group">
-                <label for="ChargeRequired">Charge Mode</label>
-                <ng-select [items]="chargeModeData"
-                  [selectOnTab]="true"
-                  [searchable]="true"
-                  bindValue="key"
-                  bindLabel="value"
-                  placeholder="Select Charge Required"
-                  [multiple]="false"
-                  [clearable]="true"
-                  [(ngModel)]="selectedChargeMode"
-                  formControlName="ChargeMode">
-                </ng-select>
+                <label for="WhoToCharge">Who To Charge</label>
+                <select class="form-control select2"
+                  formControlName="WhoToCharge"
+                  placeholder="Select Who To Charge"
+                  style="width: 100%;">
+                  <option [value]="null" disabled="disabled">Select Who To Charge</option>
+                  <option *ngFor="let item of whoToChargeData" [value]="item.key">{{item.value}}</option>
+                </select>
               </div>
             </div>
           </ng-container>

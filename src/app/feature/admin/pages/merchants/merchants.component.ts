@@ -84,6 +84,7 @@ export class MerchantsComponent implements OnInit {
     this.config.bindValue = 'value';
     this.pdfService.load('pdfMake', 'vfsFonts');
     //pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  //this.loadDatatable();
   }
 
   ngOnInit(): void {
@@ -91,9 +92,9 @@ export class MerchantsComponent implements OnInit {
     this.loadDatatable();
     this.loadAllMerchants();
     // this.dataBk = this.allMerchantList;
-    this.chargeRequiredData = CHARGE_REQUIRED_DATA;
-    this.chargeRequiredData = CHARGE_MODE_DATA;
-    this.whoToChargeData = WHO_TO_CHARGE_DATA;
+   // this.chargeRequiredData = CHARGE_REQUIRED_DATA;
+   // this.chargeModeData = CHARGE_MODE_DATA;
+   // this.whoToChargeData = WHO_TO_CHARGE_DATA;
     this.merchantStatusData = MERCHANT_STATUS_DATA;
     this.excelHeaderColumns = ['Merchant Name', 'Account Number', 'Mobile No.', 'Merchant Status', 'Notification Required', 'Who To Charge', 'Charge Mode'];
   }
@@ -181,7 +182,6 @@ export class MerchantsComponent implements OnInit {
       next: (res: any) => {
         this.allMerchantList = res.result;
         this.dataBk = res.result;
-       // console.log(this.dataBk);
         this.isLoading = false;
       },
       error: (error) => {
@@ -193,6 +193,7 @@ export class MerchantsComponent implements OnInit {
 
   addNewMerchant() {
     this.bsModalRef = this.modalService.show(MerchantCreateComponent, Object.assign({}, { class: 'gray modal-lg' }));
+   // this.loadAllMerchants();
   }
 
   removeMerchantData(rowIndex: any) { }

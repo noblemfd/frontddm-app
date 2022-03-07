@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/feature/auth/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StaffGuard implements CanActivate {
+export class BankuserGuard implements CanActivate {
   checkStatus!: boolean;
   constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
@@ -15,7 +15,7 @@ export class StaffGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.checkStatus = this.authService.isStaff();
+      return this.checkStatus = this.authService.isBankUser();
   }
 
 }

@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { NgxBootstrapSwitchModule } from 'ngx-bootstrap-switch';
 import { AlertModule,AlertConfig } from 'ngx-bootstrap/alert';
 import { PopoverModule, PopoverConfig } from 'ngx-bootstrap/popover';
 import { ProgressbarModule,ProgressbarConfig } from 'ngx-bootstrap/progressbar';
@@ -47,6 +48,7 @@ import { DatePipe } from '../../../node_modules/@angular/common';
     DatePipe
   ],
   imports: [
+  //  BrowserAnimationsModule,
     AlertModule,
     PaginationModule.forRoot(),
     CommonModule,
@@ -55,6 +57,7 @@ import { DatePipe } from '../../../node_modules/@angular/common';
     FormsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    NgxBootstrapSwitchModule.forRoot(),
     BsDropdownModule,
     PopoverModule,
     ProgressbarModule

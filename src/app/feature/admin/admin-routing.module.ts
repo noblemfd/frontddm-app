@@ -11,6 +11,8 @@ import { MandateScheduleDetailComponent } from './pages/mandate-schedules/mandat
 import { CompletedPaymentsComponent } from './pages/completed-payments/completed-payments.component';
 import { ThisYearMandateComponent } from './pages/this-year-mandate/this-year-mandate.component';
 import { ThisYearMandateDetailComponent } from './pages/this-year-mandate/this-year-mandate-detail/this-year-mandate-detail.component';
+import { MerchantUsersComponent } from './pages/merchant-users/merchant-users.component';
+import { MerchantUsersDetailComponent } from './pages/merchant-users/merchant-users-detail/merchant-users-detail.component';
 
 const routes: Routes = [
   {path: '',
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'merchant-list',
     component: MerchantsComponent
+  },
+  {
+    path: 'merchant-users-list',
+    component: MerchantUsersComponent
+  },
+  {
+    path: 'merchant-users-detail/:id',
+    component: MerchantUsersDetailComponent
   },
   {
     path: 'mandate-list',

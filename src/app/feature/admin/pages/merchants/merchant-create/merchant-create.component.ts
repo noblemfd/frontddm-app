@@ -11,7 +11,6 @@ import { take } from 'rxjs/operators';
 import { MerchantService } from 'src/app/feature/admin/services/merchant.service';
 import { UsernameValidator } from 'src/app/shared/validators/username-validator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Pagination, PaginatedResult } from 'src/app/shared/models/pagination';
 import { IMerchant, IMerchants, IResponse } from 'src/app/feature/admin/models/merchants.model';
 import { Observable } from 'rxjs';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
@@ -46,14 +45,15 @@ export class MerchantCreateComponent implements OnInit {
     private toastr: ToastrService,
     private bsModalRef: BsModalRef,
     private modalService: BsModalService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     // this.isLoading = true;
-    this.createMerchant();
     this.chargeRequiredData = CHARGE_REQUIRED_DATA;
     this.chargeModeData = CHARGE_MODE_DATA;
     this.whoToChargeData = WHO_TO_CHARGE_DATA;
+    this.createMerchant();
    // this.createMerchantForm.get('ChargeRequired').valueChanges
     //.subscribe(value => this.toggleValidity(value));
   }
@@ -69,6 +69,7 @@ export class MerchantCreateComponent implements OnInit {
       ChargeMode: [''],
       ChargePercent: ['', RxwebValidators.numeric({ allowDecimal: true, isFormat: true })],
       ChargeValue: ['', RxwebValidators.numeric({ allowDecimal: true, isFormat: true })],
+    //  PaymentFrequency: ['', [Validators.required]],
     });
   }
 
